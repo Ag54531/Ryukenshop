@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A1 Digital Store | Premium</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-body: #f4f6f8;
+            --bg-card: #ffffff;
+            --text-main: #212121;
+            --btn-bg: #d32f2f;
+            --btn-text: #ffffff;
+            --active-tab: #d32f2f;
+            --inactive-tab: #ffffff;
+            --price-color: #000000;
+            --sub-text: #757575;
+        }
+
+        /* --- GLOBAL & SECURITY --- */
+        * {
+            -webkit-user-select: none;
+            user-select: none;
+            -webkit-touch-callout: none;
+            -webkit-tap-highlight-color: transparent;
+            outline: none;
+        }
+        img { pointer-events: none; }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            margin: 0; padding: 0;
+        }
+
+        /* HEADER */
+        .app-header {
+            background-color: #fff; padding: 12px 15px;
+            display: flex; align-items: center; justify-content: space-between;
+            box-shadow: 0 1px 5px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 100;
+        }
+        .header-left { display: flex; align-items: center; gap: 10px; }
+        
+        .store-logo-img { 
+            width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 1px solid #eee;
+        }
+        .store-name { font-size: 18px; font-weight: 800; color: #1565c0; letter-spacing: -0.5px; }
+        .header-right i { color: #24A1DE; font-size: 28px; cursor: pointer; }
+
+        /* --- CATEGORY TABS --- */
+        .cat-nav-container {
+            background: #fff;
+            padding: 12px 15px;
+            white-space: nowrap;
+            overflow-x: auto;
+            border-bottom: 1px solid #e0e0e0;
+            position: sticky;
+            top: 65px;
+            z-index: 99;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .cat-nav-container::-webkit-scrollbar { display: none; }
+
+        .cat-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 16px;
+            margin-right: 10px;
+            border-radius: 20px;
+            border: 1px solid #e0e0e0;
+            background: var(--inactive-tab);
+            color: #616161;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .cat-btn i { font-size: 14px; }
+
+        .cat-btn.active {
+            background: var(--active-tab);
+            color: #fff;
+            border-color: var(--active-tab);
+            box-shadow: 0 2px 6px rgba(211, 47, 47, 0.3);
+        }
+
+        /* CONTENT SECTIONS */
+        .tab-content { display: none; padding-bottom: 40px; animation: fadeIn 0.3s; }
+        .tab-content.active { display: block; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-header {
+            padding: 15px 15px 5px 15px;
+            display: flex; align-items: center; gap: 8px;
+            font-size: 14px; font-weight: 800; color: #37474f;
+            text-transform: uppercase; letter-spacing: 0.5px;
+            margin-top: 5px;
+        }
+
+        /* GRID */
+        .grid-container {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 10px;
+        }
+
+        /* CARD */
+        .card {
+            background: var(--bg-card); border-radius: 10px; padding: 10px;
+            border: 1px solid #e0e0e0;
+            display: flex; flex-direction: column; transition: transform 0.1s;
+        }
+        .card:active { transform: scale(0.97); }
+
+        .img-box {
+            width: 100%; height: 70px; background: #f5f5f5; border-radius: 8px;
+            display: flex; align-items: center; justify-content: center; margin-bottom: 8px;
+            overflow: hidden; position: relative;
+        }
+        
+        .card-icon { font-size: 32px; }
+        .png-icon { width: 50px; height: 50px; object-fit: contain; }
+        .flag-emoji { font-size: 42px; }
+
+        /* TELEGRAM BADGE */
+        .tg-badge {
+            position: absolute; bottom: 3px; left: 3px;
+            width: 18px; height: 18px; background: white; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.3); z-index: 10;
+        }
+        .tg-badge i { color: #24A1DE; font-size: 12px; }
+
+        .item-title { font-size: 13px; font-weight: 600; line-height: 1.3; margin-bottom: 4px; color: #263238; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; height: 34px; }
+        .item-price { font-size: 14px; font-weight: 800; color: var(--price-color); margin-bottom: 8px; }
+        .usd-price { font-size: 11px; font-weight: 500; color: var(--sub-text); margin-left: 2px; }
+
+        .buy-btn { margin-top: auto; width: 100%; padding: 8px 0; background: var(--btn-bg); color: var(--btn-text); border: none; border-radius: 6px; font-size: 12px; font-weight: 700; text-align: center; cursor: pointer; display: block; text-decoration: none; }
+        
+        /* ICONS COLORS */
+        .c-yt { color: #ff0000; }
+        .c-amz { color: #00a8e1; }
+        .c-steam { color: #171a21; }
+        .c-google { color: #4285f4; }
+        .c-ig { color: #E1306C; }
+        .c-tg { color: #24A1DE; }
+        .c-tools { color: #673ab7; }
+
+    </style>
+</head>
+<body oncontextmenu="return false;">
+
+    <div class="app-header">
+        <div class="header-left">
+            <img src="store.png" class="store-logo-img" alt="Logo">
+            <div class="store-name">A1 Digital Store</div>
+        </div>
+        <div class="header-right"><i class="fab fa-telegram" onclick="openOwner()"></i></div>
+    </div>
+
+    <div class="cat-nav-container">
+        <div class="cat-btn active" onclick="openTab('tab-subs', this)">
+            <i class="fas fa-crown"></i> Subscriptions
+        </div>
+        <div class="cat-btn" onclick="openTab('tab-acc', this)">
+            <i class="fas fa-user-shield"></i> Accounts
+        </div>
+        <div class="cat-btn" onclick="openTab('tab-srv', this)">
+            <i class="fas fa-tools"></i> Services
+        </div>
+        <div class="cat-btn" onclick="openTab('tab-pvt', this)">
+            <i class="fas fa-user-secret"></i> PVT Stuffs
+        </div>
+    </div>
+
+    <div id="tab-subs" class="tab-content active">
+        <div class="section-header"><i class="fas fa-crown"></i> Premium Subscriptions</div>
+        <div class="grid-container">
+            <div class="card"><div class="img-box"><i class="fab fa-youtube card-icon c-yt"></i></div><div class="item-title">YouTube Premium (1 Month)</div><div class="item-price">₹40 <span class="usd-price">($0.43)</span></div><div class="buy-btn" onclick="buy('YT Premium 1M')">BUY NOW</div></div>
+            <div class="card"><div class="img-box"><i class="fab fa-youtube card-icon c-yt"></i></div><div class="item-title">YouTube Family (1 Month)</div><div class="item-price">₹15 <span class="usd-price">($0.16)</span></div><div class="buy-btn" onclick="buy('YT Family 1M')">BUY NOW</div></div>
+            <div class="card"><div class="img-box"><i class="fab fa-youtube card-icon c-yt"></i></div><div class="item-title">YouTube Premium (2 Months)</div><div class="item-price">₹60 <span class="usd-price">($0.65)</span></div><div class="buy-btn" onclick="buy('YT Premium 2M')">BUY NOW</div></div>
+            
+            <div class="card"><div class="img-box"><i class="fab fa-amazon card-icon c-amz"></i></div><div class="item-title">Amazon Prime (1 Month)</div><div class="item-price">₹30 <span class="usd-price">($0.32)</span></div><div class="buy-btn" onclick="buy('Amazon 1M')">BUY NOW</div></div>
+            <div class="card"><div class="img-box"><i class="fab fa-amazon card-icon c-amz"></i></div><div class="item-title">Amazon Prime (3 Months)</div><div class="item-price">₹60 <span class="usd-price">($0.65)</span></div><div class="buy-btn" onclick="buy('Amazon 3M')">BUY NOW</div></div>
+            <div class="card"><div class="img-box"><i class="fab fa-amazon card-icon c-amz"></i></div><div class="item-title">Amazon Prime (6 Months)</div><div class="item-price">₹80 <span class="usd-price">($0.86)</span></div><div class="buy-btn" onclick="buy('Amazon 6M')">BUY NOW</div></div>
+
+            <div class="card"><div class="img-box"><i class="fab fa-steam card-icon c-steam"></i></div><div class="item-title">Steam Games (GTA 5)</div><div class="item-price">Contact</div><div class="buy-btn" onclick="buy('Steam Games')">BUY NOW</div></div>
+            <div class="card"><div class="img-box"><img src="adobe.png" class="png-icon"></div><div class="item-title">Creative Cloud (4 Month)</div><div class="item-price">₹99 <span class="usd-price">($1.08)</span></div><div class="buy-btn" onclick="buy('Creative Cloud')">BUY NOW</div></div>
+
+            <div class="card"><div class="img-box"><img src="g1.png" class="png-icon"></div><div class="item-title">Google One + Gemini (1Y)</div><div class="item-price">₹149 <span class="usd-price">($1.62)</span></div><div class="buy-btn" onclick="buy('Google One')">BUY NOW</div></div>
+
+            <div class="card"><div class="img-box"><img src="crunchyroll.png" class="png-icon"></div><div class="item-title">Crunchyroll Fan (1M)</div><div class="item-price">₹49 <span class="usd-price">($0.53)</span></div><div class="buy-btn" onclick="buy('Crunchyroll Fan 1M')">BUY NOW</div></div>
+            <div class="card"><div class="img-box"><img src="crunchyroll.png" class="png-icon"></div><div class="item-title">Crunchyroll Mega (1M)</div><div class="item-price">₹99 <span class="usd-price">($1.08)</span></div><div class="buy-btn" onclick="buy('Crunchyroll Mega 1M')">BUY NOW</div></div>
+            <div class="card"><div class="img-box"><img src="crunchyroll.png" class="png-icon"></div><div class="item-title">Crunchyroll Fan (1Y)</div><div class="item-price">₹249 <span class="usd-price">($2.71)</span></div><div class="buy-btn" onclick="buy('Crunchyroll Fan 1Y')">BUY NOW</div></div>
+            <div class="card"><div class="img-box"><img src="crunchyroll.png" class="png-icon"></div><div class="item-title">Crunchyroll Mega (1Y)</div><div class="item-price">₹299 <span class="usd-price">($3.25)</span></div><div class="buy-btn" onclick="buy('Crunchyroll Mega 1Y')">BUY NOW</div></div>
+        </div>
+    </div>
+
+    <div id="tab-acc" class="tab-content">
+        <div class="section-header"><i class="fas fa-user-shield"></i> Telegram Spam Accounts</div>
+        <div class="grid-container">
+            <div class="card"><div class="img-box"><span class="flag-emoji">🇨🇷</span><div class="tg-badge"><i class="fab fa-telegram"></i></div></div><div class="item-title">Costa Rica</div><div class="item-price">₹49 <span class="usd-price">($0.53)</span></div><div class="buy-btn" onclick="buy('Costa Rica Telegram')">BUY NOW</div></div>
+            <div class="card"><div class="img-box"><span class="flag-emoji">🇺🇿</span><div class="tg-badge"><i class="fab fa-telegram"></i></div></div><div class="item-title">Uzbekistan</div><div class="item-price">₹49 <span class="usd-price">($0.53)</span></div><div class="buy-btn" onclick="buy('Uzbekistan Telegram')">BUY NOW</div></div>
+            <div class="card"><div class="img-box"><span class="flag-emoji">🇮🇷</span><div class="tg-badge"><i class="fab fa-telegram"></i></div></div><div class="item-title">Iran (Fresh)</div><div class="item-price">₹59 <span class="usd-price">($0.64)</span></div><div class="buy-btn" onclick="buy('Iran Fresh Telegram')">BUY NOW</div></div>
+        </div>
+
+        <div class="section-header"><i class="fas fa-user-times"></i> Telegram Story Disabled</div>
+        <div class="grid-container">
+            <div class="card"><div class="img-box"><span class="flag-emoji">🇮🇳</span><div class="tg-badge"><i class="fab fa-telegram"></i></div></div><div class="item-title">India (Fresh)</div><div class="item-price">₹55 <span class="usd-price">($0.64)</span></div><div class="buy-btn" onclick="buy('India Fresh Telegram')">BUY NOW</div></div>
+            <div class="card"><div class="img-box"><span class="flag-emoji">🇮🇳</span><div class="tg-badge"><i class="fab fa-telegram"></i></div></div><div class="item-title">India (Old 2023)</div><div class="item-price">₹69 <span class="usd-price">($0.76)</span></div><div class="buy-btn" onclick="buy('India 2023 Telegram')">BUY NOW</div></div>
+            <div class="card"><div class="img-box"><span class="flag-emoji">🇮🇳</span><div class="tg-badge"><i class="fab fa-telegram"></i></div></div><div class="item-title">India (Old 2021)</div><div class="item-price">₹79 <span class="usd-price">($0.86)</span></div><div class="buy-btn" onclick="buy('India 2021 Telegram')">BUY NOW</div></div>
+            <div class="card"><div class="img-box"><span class="flag-emoji">🇮🇳</span><div class="tg-badge"><i class="fab fa-telegram"></i></div></div><div class="item-title">India (Old 2019)</div><div class="item-price">₹179 <span class="usd-price">($1.95)</span></div><div class="buy-btn" onclick="buy('India 2019 Telegram')">BUY NOW</div></div>
+            <div class="card"><div class="img-box"><span class="flag-emoji">🇮🇳</span><div class="tg-badge"><i class="fab fa-telegram"></i></div></div><div class="item-title">India (2018-19)</div><div class="item-price">₹299 <span class="usd-price">($3.25)</span></div><div class="buy-btn" onclick="buy('India 2018 Telegram')">BUY NOW</div></div>
+            
+            <div class="card"><div class="img-box"><span class="flag-emoji">🇮🇷</span><div class="tg-badge"><i class="fab fa-telegram"></i></div></div><div class="item-title">Iran (2024)</div><div class="item-price">₹129 <span class="usd-price">($1.40)</span></div><div class="buy-btn" onclick="buy('Iran 2024 Telegram')">BUY NOW</div></div>
+            <div class="card"><div class="img-box"><span class="flag-emoji">🇮🇷</span><div class="tg-badge"><i class="fab fa-telegram"></i></div></div><div class="item-title">Iran (2023)</div><div class="item-price">₹159 <span class="usd-price">($1.73)</span></div><div class="buy-btn" onclick="buy('Iran 2023 Telegram')">BUY NOW</div></div>
+            <div class="card"><div class="img-box"><span class="flag-emoji">🇮🇷</span><div class="tg-badge"><i class="fab fa-telegram"></i></div></div><div class="item-title">Iran (2022)</div><div class="item-price">₹189 <span class="usd-price">($2.05)</span></div><div class="buy-btn" onclick="buy('Iran 2022 Telegram')">BUY NOW</div></div>
+            <div class="card"><div class="img-box"><span class="flag-emoji">🇮🇷</span><div class="tg-badge"><i class="fab fa-telegram"></i></div></div><div class="item-title">Iran (2020)</div><div class="item-price">₹299 <span class="usd-price">($3.25)</span></div><div class="buy-btn" onclick="buy('Iran 2020 Telegram')">BUY NOW</div></div>
+        </div>
+
+        <div class="section-header"><i class="fas fa-check-circle"></i> Telegram Story Enabled</div>
+        <div class="grid-container">
+            <div class="card"><div class="img-box"><span class="flag-emoji">🇲🇦</span><div class="tg-badge"><i class="fab fa-telegram"></i></div></div><div class="item-title">Morocco (Old)</div><div class="item-price">₹79 <span class="usd-price">($0.86)</span></div><div class="buy-btn" onclick="buy('Morocco Telegram')">BUY NOW</div></div>
+            <div class="card"><div class="img-box"><span class="flag-emoji">🇺🇸</span><div class="tg-badge"><i class="fab fa-telegram"></i></div></div><div class="item-title">USA</div><div class="item-price">₹99 <span class="usd-price">($1.08)</span></div><div class="buy-btn" onclick="buy('USA Telegram')">BUY NOW</div></div>
+            <div class="card"><div class="img-box"><span class="flag-emoji">🇪🇬</span><div class="tg-badge"><i class="fab fa-telegram"></i></div></div><div class="item-title">Egypt (Old)</div><div class="item-price">₹89 <span class="usd-price">($0.97)</span></div><div class="buy-btn" onclick="buy('Egypt Telegram')">BUY NOW</div></div>
+            <div class="card"><div class="img-box"><span class="flag-emoji">🇧🇩</span><div class="tg-badge"><i class="fab fa-telegram"></i></div></div><div class="item-title">Bangladesh</div><div class="item-price">₹79 <span class="usd-price">($0.86)</span></div><div class="buy-btn" onclick="buy('Bangladesh Telegram')">BUY NOW</div></div>
+            <div class="card"><div class="img-box"><span class="flag-emoji">🇻🇳</span><div class="tg-badge"><i class="fab fa-telegram"></i></div></div><div class="item-title">Vietnam</div><div class="item-price">₹89 <span class="usd-price">($0.97)</span></div><div class="buy-btn" onclick="buy('Vietnam Telegram')">BUY NOW</div></div>
+            <div class="card"><div class="img-box"><span class="flag-emoji">🇵🇱</span><div class="tg-badge"><i class="fab fa-telegram"></i></div></div><div class="item-title">Poland</div><div class="item-price">₹299 <span class="usd-price">($3.25)</span></div><div class="buy-btn" onclick="buy('Poland Telegram')">BUY NOW</div></div>
+            <div class="card"><div class="img-box"><span class="flag-emoji">🇬🇧</span><div class="tg-badge"><i class="fab fa-telegram"></i></div></div><div class="item-title">United Kingdom</div><div class="item-price">₹149 <span class="usd-price">($1.62)</span></div><div class="buy-btn" onclick="buy('UK Telegram')">BUY NOW</div></div>
+            
+            <div class="card"><div class="img-box"><span class="flag-emoji">🇨🇳</span><div class="tg-badge"><i class="fab fa-telegram"></i></div></div><div class="item-title">China</div><div class="item-price">₹139 <span class="usd-price">($1.51)</span></div><div class="buy-btn" onclick="buy('China Telegram')">BUY NOW</div></div>
+            <div class="card"><div class="img-box"><span class="flag-emoji">🇨🇦</span><div class="tg-badge"><i class="fab fa-telegram"></i></div></div><div class="item-title">Canada (Real)</div><div class="item-price">₹129 <span class="usd-price">($1.40)</span></div><div class="buy-btn" onclick="buy('Canada Telegram')">BUY NOW</div></div>
+            <div class="card"><div class="img-box"><span class="flag-emoji">🇵🇭</span><div class="tg-badge"><i class="fab fa-telegram"></i></div></div><div class="item-title">Philippines</div><div class="item-price">₹99 <span class="usd-price">($1.08)</span></div><div class="buy-btn" onclick="buy('Philippines Telegram')">BUY NOW</div></div>
+            <div class="card"><div class="img-box"><span class="flag-emoji">🇦🇿</span><div class="tg-badge"><i class="fab fa-telegram"></i></div></div><div class="item-title">Azerbaijan</div><div class="item-price">₹119 <span class="usd-price">($1.29)</span></div><div class="buy-btn" onclick="buy('Azerbaijan Telegram')">BUY NOW</div></div>
+            <div class="card"><div class="img-box"><span class="flag-emoji">🇿🇦</span><div class="tg-badge"><i class="fab fa-telegram"></i></div></div><div class="item-title">South Africa</div><div class="item-price">₹99 <span class="usd-price">($1.08)</span></div><div class="buy-btn" onclick="buy('South Africa Telegram')">BUY NOW</div></div>
+            <div class="card"><div class="img-box"><span class="flag-emoji">🇳🇵</span><div class="tg-badge"><i class="fab fa-telegram"></i></div></div><div class="item-title">Nepal</div><div class="item-price">₹109 <span class="usd-price">($1.18)</span></div><div class="buy-btn" onclick="buy('Nepal Telegram')">BUY NOW</div></div>
+            <div class="card"><div class="img-box"><span class="flag-emoji">🇧🇷</span><div class="tg-badge"><i class="fab fa-telegram"></i></div></div><div class="item-title">Brazil</div><div class="item-price">₹99 <span class="usd-price">($1.08)</span></div><div class="buy-btn" onclick="buy('Brazil Telegram')">BUY NOW</div></div>
+            <div class="card"><div class="img-box"><span class="flag-emoji">🇪🇨</span><div class="tg-badge"><i class="fab fa-telegram"></i></div></div><div class="item-title">Ecuador</div><div class="item-price">₹79 <span class="usd-price">($0.86)</span></div><div class="buy-btn" onclick="buy('Ecuador Telegram')">BUY NOW</div></div>
+            <div class="card"><div class="img-box"><span class="flag-emoji">🇧🇯</span><div class="tg-badge"><i class="fab fa-telegram"></i></div></div><div class="item-title">Benin</div><div class="item-price">₹89 <span class="usd-price">($0.97)</span></div><div class="buy-btn" onclick="buy('Benin Telegram')">BUY NOW</div></div>
+            <div class="card"><div class="img-box"><span class="flag-emoji">🇧🇫</span><div class="tg-badge"><i class="fab fa-telegram"></i></div></div><div class="item-title">Burkina-Faso</div><div class="item-price">₹119 <span class="usd-price">($1.29)</span></div><div class="buy-btn" onclick="buy('Burkina Faso Telegram')">BUY NOW</div></div>
+            <div class="card"><div class="img-box"><span class="flag-emoji">🇺🇾</span><div class="tg-badge"><i class="fab fa-telegram"></i></div></div><div class="item-title">Uruguay</div><div class="item-price">₹139 <span class="usd-price">($1.51)</span></div><div class="buy-btn" onclick="buy('Uruguay Telegram')">BUY NOW</div></div>
+        </div>
+
+        <div class="section-header"><i class="fab fa-instagram"></i> Instagram Aged Accounts</div>
+        <div class="grid-container">
+            <div class="card"><div class="img-box"><img src="instagram.png" class="png-icon"></div><div class="item-title">2013 Aged</div><div class="item-price">₹129 <span class="usd-price">($1.40)</span></div><div class="buy-btn" onclick="buy('Instagram 2013')">BUY NOW</div></div>
+            <div class="card"><div class="img-box"><img src="instagram.png" class="png-icon"></div><div class="item-title">2024 Aged</div><div class="item-price">₹99 <span class="usd-price">($1.08)</span></div><div class="buy-btn" onclick="buy('Instagram 2024')">BUY NOW</div></div>
+            <div class="card"><div class="img-box"><img src="instagram.png" class="png-icon"></div><div class="item-title">2015 Aged</div><div class="item-price">₹79 <span class="usd-price">($0.86)</span></div><div class="buy-btn" onclick="buy('Instagram 2015')">BUY NOW</div></div>
+            <div class="card"><div class="img-box"><img src="instagram.png" class="png-icon"></div><div class="item-title">2016 Aged</div><div class="item-price">₹59 <span class="usd-price">($0.64)</span></div><div class="buy-btn" onclick="buy('Instagram 2016')">BUY NOW</div></div>
+            <div class="card"><div class="img-box"><img src="instagram.png" class="png-icon"></div><div class="item-title">2017 Aged</div><div class="item-price">₹49 <span class="usd-price">($0.53)</span></div><div class="buy-btn" onclick="buy('Instagram 2017')">BUY NOW</div></div>
+            <div class="card"><div class="img-box"><img src="instagram.png" class="png-icon"></div><div class="item-title">2018 Aged</div><div class="item-price">₹39 <span class="usd-price">($0.42)</span></div><div class="buy-btn" onclick="buy('Instagram 2018')">BUY NOW</div></div>
+        </div>
+    </div>
+
+    <div id="tab-srv" class="tab-content">
+        <div class="section-header"><i class="fas fa-tools"></i> Services (Per 1k)</div>
+        <div class="grid-container">
+            <div class="card"><div class="img-box"><i class="fas fa-eye card-icon c-ig"></i></div><div class="item-title">Instagram Views</div><div class="item-price">₹0.5 <span class="usd-price">($0.005)</span></div><div class="buy-btn" onclick="buy('Instagram Views')">BUY NOW</div></div>
+            <div class="card"><div class="img-box"><i class="fas fa-heart card-icon c-ig"></i></div><div class="item-title">Instagram Likes</div><div class="item-price">₹20 <span class="usd-price">($0.21)</span></div><div class="buy-btn" onclick="buy('Instagram Likes')">BUY NOW</div></div>
+            <div class="card"><div class="img-box"><i class="fas fa-user-plus card-icon c-ig"></i></div><div class="item-title">Instagram Followers</div><div class="item-price">₹100 <span class="usd-price">($1.08)</span></div><div class="buy-btn" onclick="buy('Instagram Followers')">BUY NOW</div></div>
+            <div class="card"><div class="img-box"><i class="fas fa-comment card-icon c-ig"></i></div><div class="item-title">Instagram Comments</div><div class="item-price">₹50 <span class="usd-price">($0.54)</span></div><div class="buy-btn" onclick="buy('Instagram Comments')">BUY NOW</div></div>
+            <div class="card"><div class="img-box"><i class="fas fa-share card-icon c-ig"></i></div><div class="item-title">Instagram Shares</div><div class="item-price">₹5 <span class="usd-price">($0.06)</span></div><div class="buy-btn" onclick="buy('Instagram Shares')">BUY NOW</div></div>
+            
+            <div class="card"><div class="img-box"><i class="fas fa-chart-bar card-icon c-tg"></i></div><div class="item-title">Telegram Reaction/View</div><div class="item-price">₹5 <span class="usd-price">($0.05)</span></div><div class="buy-btn" onclick="buy('Telegram Views')">BUY NOW</div></div>
+            <div class="card"><div class="img-box"><i class="fas fa-users card-icon c-tg"></i></div><div class="item-title">Telegram Members</div><div class="item-price">₹50 <span class="usd-price">($0.54)</span></div><div class="buy-btn" onclick="buy('Telegram Members')">BUY NOW</div></div>
+        </div>
+    </div>
+
+    <div id="tab-pvt" class="tab-content">
+        <div class="section-header"><i class="fas fa-user-secret"></i> PVT Stuffs</div>
+        <div class="grid-container">
+            <div class="card"><div class="img-box"><i class="fas fa-info-circle card-icon c-tools"></i></div><div class="item-title">TG Username/ID To Number</div><div class="item-price">₹49 <span class="usd-price">($0.53)</span></div><div class="buy-btn" onclick="buy('TG Username/ID To Number')">BUY NOW</div></div>
+            <div class="card"><div class="img-box"><i class="fas fa-code card-icon c-tools"></i></div><div class="item-title">TG Member Scrapping Script</div><div class="item-price">₹49 <span class="usd-price">($0.53)</span></div><div class="buy-btn" onclick="buy('TG Member Scrapping Script')">BUY NOW</div></div>
+            <div class="card"><div class="img-box"><i class="fas fa-robot card-icon c-tools"></i></div><div class="item-title">Sher ID Verification Bot</div><div class="item-price">₹49 <span class="usd-price">($0.53)</span></div><div class="buy-btn" onclick="buy('Sher ID Verification Bot')">BUY NOW</div></div>
+            <div class="card"><div class="img-box"><i class="fas fa-laptop-code card-icon c-tools"></i></div><div class="item-title">Bot Making</div><div class="item-price">Contact</div><div class="buy-btn" onclick="buy('Bot Making')">BUY NOW</div></div>
+            <div class="card"><div class="img-box"><i class="fas fa-graduation-cap card-icon c-tools"></i></div><div class="item-title">C4RDING Course</div><div class="item-price">₹99 <span class="usd-price">($1.08)</span></div><div class="buy-btn" onclick="buy('Carding Course')">BUY NOW</div></div>
+        </div>
+    </div>
+
+    <script>
+        // TABS LOGIC
+        function openTab(tabId, btn) {
+            var contents = document.getElementsByClassName("tab-content");
+            for (var i = 0; i < contents.length; i++) {
+                contents[i].style.display = "none";
+                contents[i].classList.remove("active");
+            }
+            var buttons = document.getElementsByClassName("cat-btn");
+            for (var i = 0; i < buttons.length; i++) {
+                buttons[i].classList.remove("active");
+            }
+            document.getElementById(tabId).style.display = "block";
+            setTimeout(function(){ document.getElementById(tabId).classList.add("active"); }, 10);
+            btn.classList.add("active");
+        }
+
+        function buy(item) {
+            var user = "ryukensama7";
+            var text = "Hello Ryuken, I want " + item + " available?";
+            var url = "https://t.me/" + user + "?text=" + encodeURIComponent(text);
+            window.location.href = url;
+        }
+        function openOwner() { window.location.href = "https://t.me/noteastern"; }
+    </script>
+</body>
+</html>
