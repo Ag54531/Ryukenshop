@@ -72,7 +72,7 @@
             gap: 6px;
             padding: 8px 16px;
             margin-right: 10px;
-            /* Increased border-radius for smoother tabs */
+            /* Smooth Rounded Tabs */
             border-radius: 24px;
             border: 1px solid #e0e0e0;
             background: var(--inactive-tab);
@@ -117,25 +117,28 @@
         /* CARD */
         .card {
             background: var(--bg-card);
-            /* Increased border-radius for rounded corners */
-            border-radius: 16px;
+            /* Rounded Corners for Card */
+            border-radius: 16px; 
             padding: 10px;
             border: 1px solid #e0e0e0;
             display: flex; flex-direction: column; transition: transform 0.1s;
-            /* Ensures content doesn't bleed out of rounded corners */
             overflow: hidden;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.03);
         }
         .card:active { transform: scale(0.97); }
 
         .img-box {
-            width: 100%; height: 70px; background: #f5f5f5; border-radius: 12px;
+            width: 100%; height: 70px; background: #f5f5f5;
+            /* Rounded Corners for Image Box */
+            border-radius: 12px; 
             display: flex; align-items: center; justify-content: center; margin-bottom: 8px;
             overflow: hidden; position: relative;
         }
         
         .card-icon { font-size: 32px; }
-        .png-icon { width: 50px; height: 50px; object-fit: contain; }
+        
+        /* Adjusted for your PNG sizes */
+        .png-icon { width: 55px; height: 55px; object-fit: contain; } 
         .flag-emoji { font-size: 42px; }
 
         /* TELEGRAM BADGE */
@@ -168,7 +171,7 @@
 
     <div class="app-header">
         <div class="header-left">
-            <img src="store.png" class="store-logo-img" alt="Logo">
+            <img src="shop.png" class="store-logo-img" alt="Logo">
             <div class="store-name">A1 Digital Store</div>
         </div>
         <div class="header-right"><i class="fab fa-telegram" onclick="openOwner()"></i></div>
@@ -259,12 +262,12 @@
 
         <div class="section-header"><i class="fab fa-instagram"></i> Instagram Aged Accounts</div>
         <div class="grid-container">
-            <div class="card"><div class="img-box"><img src="instagram.png" class="png-icon"></div><div class="item-title">2013 Aged</div><div class="item-price">₹129 <span class="usd-price">($1.40)</span></div><div class="buy-btn" onclick="buy('Instagram 2013')">BUY NOW</div></div>
-            <div class="card"><div class="img-box"><img src="instagram.png" class="png-icon"></div><div class="item-title">2024 Aged</div><div class="item-price">₹99 <span class="usd-price">($1.08)</span></div><div class="buy-btn" onclick="buy('Instagram 2024')">BUY NOW</div></div>
-            <div class="card"><div class="img-box"><img src="instagram.png" class="png-icon"></div><div class="item-title">2015 Aged</div><div class="item-price">₹79 <span class="usd-price">($0.86)</span></div><div class="buy-btn" onclick="buy('Instagram 2015')">BUY NOW</div></div>
-            <div class="card"><div class="img-box"><img src="instagram.png" class="png-icon"></div><div class="item-title">2016 Aged</div><div class="item-price">₹59 <span class="usd-price">($0.64)</span></div><div class="buy-btn" onclick="buy('Instagram 2016')">BUY NOW</div></div>
-            <div class="card"><div class="img-box"><img src="instagram.png" class="png-icon"></div><div class="item-title">2017 Aged</div><div class="item-price">₹49 <span class="usd-price">($0.53)</span></div><div class="buy-btn" onclick="buy('Instagram 2017')">BUY NOW</div></div>
-            <div class="card"><div class="img-box"><img src="instagram.png" class="png-icon"></div><div class="item-title">2018 Aged</div><div class="item-price">₹39 <span class="usd-price">($0.42)</span></div><div class="buy-btn" onclick="buy('Instagram 2018')">BUY NOW</div></div>
+            <div class="card"><div class="img-box"><img src="Instagram.png" class="png-icon"></div><div class="item-title">2013 Aged</div><div class="item-price">₹129 <span class="usd-price">($1.40)</span></div><div class="buy-btn" onclick="buy('Instagram 2013')">BUY NOW</div></div>
+            <div class="card"><div class="img-box"><img src="Instagram.png" class="png-icon"></div><div class="item-title">2024 Aged</div><div class="item-price">₹99 <span class="usd-price">($1.08)</span></div><div class="buy-btn" onclick="buy('Instagram 2024')">BUY NOW</div></div>
+            <div class="card"><div class="img-box"><img src="Instagram.png" class="png-icon"></div><div class="item-title">2015 Aged</div><div class="item-price">₹79 <span class="usd-price">($0.86)</span></div><div class="buy-btn" onclick="buy('Instagram 2015')">BUY NOW</div></div>
+            <div class="card"><div class="img-box"><img src="Instagram.png" class="png-icon"></div><div class="item-title">2016 Aged</div><div class="item-price">₹59 <span class="usd-price">($0.64)</span></div><div class="buy-btn" onclick="buy('Instagram 2016')">BUY NOW</div></div>
+            <div class="card"><div class="img-box"><img src="Instagram.png" class="png-icon"></div><div class="item-title">2017 Aged</div><div class="item-price">₹49 <span class="usd-price">($0.53)</span></div><div class="buy-btn" onclick="buy('Instagram 2017')">BUY NOW</div></div>
+            <div class="card"><div class="img-box"><img src="Instagram.png" class="png-icon"></div><div class="item-title">2018 Aged</div><div class="item-price">₹39 <span class="usd-price">($0.42)</span></div><div class="buy-btn" onclick="buy('Instagram 2018')">BUY NOW</div></div>
         </div>
     </div>
 
@@ -285,9 +288,9 @@
     <div id="tab-pvt" class="tab-content">
         <div class="section-header"><i class="fas fa-user-secret"></i> PVT Stuffs</div>
         <div class="grid-container">
-            <div class="card"><div class="img-box"><i class="fas fa-info-circle card-icon c-tools"></i></div><div class="item-title">Telegram Info</div><div class="item-price">₹49 <span class="usd-price">($0.53)</span></div><div class="buy-btn" onclick="buy('Telegram Info')">BUY NOW</div></div>
-            <div class="card"><div class="img-box"><i class="fas fa-code card-icon c-tools"></i></div><div class="item-title">Scrapping Script</div><div class="item-price">₹49 <span class="usd-price">($0.53)</span></div><div class="buy-btn" onclick="buy('Scrapping Script')">BUY NOW</div></div>
-            <div class="card"><div class="img-box"><i class="fas fa-robot card-icon c-tools"></i></div><div class="item-title">Verify Bot</div><div class="item-price">₹49 <span class="usd-price">($0.53)</span></div><div class="buy-btn" onclick="buy('Verify Bot')">BUY NOW</div></div>
+            <div class="card"><div class="img-box"><i class="fas fa-info-circle card-icon c-tools"></i></div><div class="item-title">Telegram Username/ID To Number</div><div class="item-price">₹49 <span class="usd-price">($0.53)</span></div><div class="buy-btn" onclick="buy('Telegram Username/ID To Number')">BUY NOW</div></div>
+            <div class="card"><div class="img-box"><i class="fas fa-code card-icon c-tools"></i></div><div class="item-title">Telegram Member Scrapping Script</div><div class="item-price">₹49 <span class="usd-price">($0.53)</span></div><div class="buy-btn" onclick="buy('Telegram Member Scrapping Script')">BUY NOW</div></div>
+            <div class="card"><div class="img-box"><i class="fas fa-robot card-icon c-tools"></i></div><div class="item-title">Sher ID Verification Bot</div><div class="item-price">₹49 <span class="usd-price">($0.53)</span></div><div class="buy-btn" onclick="buy('Sher ID Verification Bot')">BUY NOW</div></div>
             <div class="card"><div class="img-box"><i class="fas fa-laptop-code card-icon c-tools"></i></div><div class="item-title">Bot Making</div><div class="item-price">Contact</div><div class="buy-btn" onclick="buy('Bot Making')">BUY NOW</div></div>
             <div class="card"><div class="img-box"><i class="fas fa-graduation-cap card-icon c-tools"></i></div><div class="item-title">C4RDING Course</div><div class="item-price">₹99 <span class="usd-price">($1.08)</span></div><div class="buy-btn" onclick="buy('Carding Course')">BUY NOW</div></div>
         </div>
