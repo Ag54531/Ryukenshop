@@ -45,6 +45,7 @@
         }
         .header-left { display: flex; align-items: center; gap: 10px; }
         
+        /* SHOP LOGO (Round) */
         .store-logo-img { 
             width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 1px solid #eee;
         }
@@ -72,7 +73,6 @@
             gap: 6px;
             padding: 8px 16px;
             margin-right: 10px;
-            /* Smooth Rounded Tabs */
             border-radius: 24px;
             border: 1px solid #e0e0e0;
             background: var(--inactive-tab);
@@ -117,7 +117,6 @@
         /* CARD */
         .card {
             background: var(--bg-card);
-            /* Rounded Corners for Card */
             border-radius: 16px; 
             padding: 10px;
             border: 1px solid #e0e0e0;
@@ -129,7 +128,6 @@
 
         .img-box {
             width: 100%; height: 70px; background: #f5f5f5;
-            /* Rounded Corners for Image Box */
             border-radius: 12px; 
             display: flex; align-items: center; justify-content: center; margin-bottom: 8px;
             overflow: hidden; position: relative;
@@ -137,8 +135,13 @@
         
         .card-icon { font-size: 32px; }
         
-        /* Adjusted for your PNG sizes */
-        .png-icon { width: 55px; height: 55px; object-fit: contain; } 
+        /* PNG ICONS STYLE (ROUNDED CORNERS ADDED HERE) */
+        .png-icon { 
+            width: 55px; height: 55px; 
+            object-fit: contain;
+            border-radius: 12px; /* Soft Rounded Edges for Icons */
+        } 
+        
         .flag-emoji { font-size: 42px; }
 
         /* TELEGRAM BADGE */
